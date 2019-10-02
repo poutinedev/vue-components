@@ -1,0 +1,10 @@
+@import "variables";
+@import "base";
+@import "type";
+
+:root {
+  // font families
+  @each $name, $font in $fonts {
+    --font-family-#{$name}: #{$font};
+  }
+}
