@@ -8,7 +8,12 @@
         aria-describedby="modalDescription"
       >
         <header class="modal__header" id="modalTitle">
-          <button type="button" class="modal__close" aria-label="Close modal" @click="close">
+          <button
+            type="button"
+            class="modal__close"
+            aria-label="Close modal"
+            @click="$emit('close')"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357">
               <path
                 d="M357 35.7L321.3 0 178.5 142.8 35.7 0 0 35.7l142.8 142.8L0 321.3 35.7 357l142.8-142.8L321.3 357l35.7-35.7-142.8-142.8z"
@@ -30,12 +35,7 @@
 
 <script>
 export default {
-  name: "modal",
-  methods: {
-    close() {
-      this.$emit("close");
-    }
-  }
+  name: "modal"
 };
 </script>
 
@@ -54,6 +54,7 @@ export default {
 }
 
 .modal {
+  --modal-body-bg-color: #fff;
   position: relative;
   width: 100%;
   max-width: 960px;
@@ -62,6 +63,7 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: visible;
+  background-color: var(--modal-body-bg-color);
 }
 
 .modal__header {
@@ -76,39 +78,44 @@ export default {
 }
 
 .modal__close {
-  $i: 60px;
+  --modal-close-icon-dims: 5rem;
   position: absolute;
-  top: calc(#{$i} / -2);
-  right: calc(#{$i} / -2);
-  width: $i;
-  height: $i;
+  top: calc(var(--modal-close-icon-dims) / -2);
+  right: calc(var(--modal-close-icon-dims) / -2);
+  width: var(--modal-close-icon-dims);
+  height: var(--modal-close-icon-dims);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 100%;
-  background-color: #ccc;
+  background-color: #000;
   font-weight: 700;
   font-size: 1rem;
-  line-height: $i;
+  line-height: var(--modal-close-icon-dims);
   color: #fff;
   text-align: center;
-  box-shadow: 0 3px 5px 0 rgba(#000, 0.35);
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.35);
   will-change: transform;
   transform-origin: center;
   transition: transform 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
-
-  svg {
-    width: 50%;
-    margin: 0 auto;
-
-    path {
-      fill: #fff;
-    }
-  }
-
-  &:hover {
-    transform: scale(1.15);
-  }
+  border: 0;
 }
 
-// transitions
+.modal__close svg {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.modal__close svg path {
+  fill: #fff;
+}
+
+.modal__close:hover {
+  transform: scale(1.15);
+}
+
+/* Transitions */
+
 .modal-fade-enter,
 .modal-fade-leave-active {
   opacity: 0;

@@ -1,0 +1,10 @@
+//
+// Typography
+//
+
+// type sizing
+@each $name, $size in $type-sizes {
+  .#{$name} {
+    font-size: var(--type-#{$name});
+  }
+}
