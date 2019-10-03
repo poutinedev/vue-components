@@ -1,3 +1,9 @@
 //
 // Utilities
 //
+
+@mixin reset-first-item {
+  > *:first-of-type {
+    margin-top: 0;
+  }
+}

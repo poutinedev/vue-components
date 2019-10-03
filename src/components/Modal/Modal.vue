@@ -40,78 +40,91 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../assets/styles/utils";
+
 .modal-backdrop {
+  --modal-backdrop-color: rgba(0, 0, 0, 0.65);
+  --modal-backdrop-blur-amount: 5px;
+  --modal-close-dims: 5rem;
+  --modal-close-bg-color: #f54768;
+  --modal-close-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.35);
+  --modal-close-x-fill: #fff;
+  --modal-close-hover-scale: 1.15;
+  --modal-body-bg-color: #fff;
+  --modal-padding: 2rem;
+  --modal-easing: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --modal-radius: 5px;
+  --modal-max-width: 960px;
+  --modal-max-height: 90vh;
+
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(#000, 0.65);
+  background-color: var(--modal-backdrop-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(5px);
-}
+  backdrop-filter: blur(var(--modal-backdrop-blur-amount));
 
-.modal {
-  --modal-body-bg-color: #fff;
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  max-height: 90vh;
-  overflow-x: auto;
-  display: flex;
-  flex-direction: column;
-  overflow: visible;
-  background-color: var(--modal-body-bg-color);
-}
+  .modal {
+    position: relative;
+    width: 100%;
+    max-width: var(--modal-max-width);
+    max-height: var(--modal-max-height);
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    background-color: var(--modal-body-bg-color);
+    padding: var(--modal-padding);
+    border-radius: var(--modal-radius);
+  }
 
-.modal__header {
-}
+  .modal__header {
+    @include reset-first-item;
+  }
 
-.modal__body {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
+  .modal__body {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    @include reset-first-item;
+  }
 
-.modal__footer {
-}
+  .modal__footer {
+  }
 
-.modal__close {
-  --modal-close-icon-dims: 5rem;
-  position: absolute;
-  top: calc(var(--modal-close-icon-dims) / -2);
-  right: calc(var(--modal-close-icon-dims) / -2);
-  width: var(--modal-close-icon-dims);
-  height: var(--modal-close-icon-dims);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  background-color: #000;
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: var(--modal-close-icon-dims);
-  color: #fff;
-  text-align: center;
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.35);
-  will-change: transform;
-  transform-origin: center;
-  transition: transform 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
-  border: 0;
-}
+  .modal__close {
+    position: absolute;
+    top: calc(var(--modal-close-dims) / -2);
+    right: calc(var(--modal-close-dims) / -2);
+    width: var(--modal-close-dims);
+    height: var(--modal-close-dims);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: var(--modal-close-bg-color);
+    box-shadow: var(--modal-close-shadow);
+    will-change: transform;
+    transform-origin: center;
+    transition: transform 150ms var(--modal-easing);
+    border: 0;
 
-.modal__close svg {
-  width: 50%;
-  margin: 0 auto;
-}
+    svg {
+      width: 60%;
+    }
 
-.modal__close svg path {
-  fill: #fff;
-}
+    svg path {
+      fill: var(--modal-close-x-fill);
+    }
 
-.modal__close:hover {
-  transform: scale(1.15);
+    &:hover {
+      transform: scale(var(--modal-close-hover-scale));
+      cursor: pointer;
+    }
+  }
 }
 
 /* Transitions */
@@ -123,6 +136,6 @@ export default {
 
 .modal-fade-enter-active,
 .modal-fade-leave-active {
-  transition: opacity 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: opacity 0.25s var(--modal-easing);
 }
 </style>
