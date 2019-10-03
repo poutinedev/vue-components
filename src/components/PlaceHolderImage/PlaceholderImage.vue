@@ -1,30 +1,25 @@
 <template>
-  <div>
-    <img v-bind:src='fakeImage(600,600,"nature")' alt="" />
-    <p>Hard-refresh for a new image.</p>
-  </div>
+  <img v-bind:src="fakeImage(width,height,category)" :alt="alt" />
 </template>
 
 <style lang="scss">
-:root {
-  text-align: center;
-  font: normal 18px/1.3 sans-serif;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
 </style>
 
 <script>
 export default {
+  props: {
+    category: String,
+    width: Number,
+    height: Number,
+    alt: String
+  },
   methods: {
-    fakeImage(w, h, cat) {
-      let c = cat != undefined ? cat : 'any'
-      let img = `https://placeimg.com/${w}/${h}/${c}`
-      return img
+    fakeImage() {
+      let cat = this.category != undefined ? this.category : "any";
+      let src = `https://placeimg.com/${this.width}/${this.height}/${cat}`;
+
+      return src;
     }
   }
-}
+};
 </script>
