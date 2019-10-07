@@ -1,5 +1,5 @@
 <template>
-  <time :datetime="date" v-html="readableDate(date)"/>
+  <time :datetime="date">{{ makeDateHumanReadable(date) }}</time>
 </template>
 
 <script>
@@ -8,15 +8,15 @@ export default {
     date: String
   },
   methods: {
-    readableDate(value) {
-      let newDate = new Date(value).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })
+    makeDateHumanReadable(value) {
+      let newDate = new Date(value).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
 
-      return newDate
+      return newDate;
     }
   }
-}
+};
 </script>
