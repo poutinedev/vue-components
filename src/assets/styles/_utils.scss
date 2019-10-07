@@ -7,3 +7,8 @@
     margin-top: 0;
   }
 }
+
+@mixin responsive-image {
+  max-width: 100%;
+  height: auto;
+}
