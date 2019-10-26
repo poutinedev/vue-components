@@ -5,6 +5,12 @@
 ```
 yarn install
 ```
+### Run Storybook
+
+```
+yarn storybook
+```
+---
 
 ### Compiles and hot-reloads for development
 
